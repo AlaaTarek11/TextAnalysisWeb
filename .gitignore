@@ -8,7 +8,7 @@ yarn-error.log
 # rollup-test output
 /modules/rollup-test/dist/
 /node_modules/
-/src/assets/images/
+#/src/assets/images/
 
 # User specific bazel settings
 .bazelrc.user
@@ -26,7 +26,7 @@ baseline.json
 .husky/_
 aio/content/examples/.DS_Store
 node_modules
-src/assets/images
+#src/assets/images
 
 
 # Ignore cache created with the Angular CLI.
