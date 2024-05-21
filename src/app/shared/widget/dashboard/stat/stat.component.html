@@ -8,7 +8,7 @@
                 </div>
                 <div class="flex-shrink-0">
                     <h5 class="fs-14 mb-0" [ngClass]=" {'text-success': profit === 'up', 'text-danger': profit === 'down', 'text-muted': profit === 'equal'}">
-                        <i class="fs-13 align-middle" [ngClass]=" {'ri-arrow-right-up-line': profit === 'up', 'ri-arrow-right-down-line': profit === 'down'}"></i> <span *ngIf="profit == 'up' || profit == 'equal'">+</span> <span *ngIf="profit == 'down'">-</span>{{persantage}} %
+                        <i class="fs-13 align-middle" [ngClass]=" {'ri-arrow-right-up-line': profit === 'up', 'ri-arrow-right-down-line': profit === 'down'}"></i> <span *ngIf="profit == 'up' || profit == 'equal'">+</span> <span *ngIf="profit == 'down'">-</span>{{persantage}} 
                     </h5>
                 </div>
             </div>

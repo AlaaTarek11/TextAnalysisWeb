@@ -7,11 +7,13 @@ import { ChartOptions } from './analytics.model';
  */
  const statData = [{
     title: 'الملفات',
-    value: 28.05,
-    icon: 'users',
-    persantage: '16.24',
-    profit: 'up',
-    icon_bg_color: 'bg-primary'
+    value: 165.89,
+    icon: 'bx-wallet',
+    persantage: '2.00',
+    profit: 'equal',
+    icon_bg_color:'bg-primary',
+    link: 'Withdraw money',
+    
   }, {
       title: 'اصول الكالمات',
       value: 97.66,
@@ -22,10 +24,12 @@ import { ChartOptions } from './analytics.model';
   }, {
       title: 'ملفات اليوم',
       value: 33.48,
-      icon: 'external-link',
-      persantage: '7.05',
-      profit: 'up',
-      icon_bg_color: 'bg-success'
+  
+      icon: 'bx-wallet',
+      persantage: '0.00',
+      profit: 'equal',
+      icon_bg_color:'bg-danger',
+      link: 'Withdraw money'
   }
 ];
 

@@ -4,6 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 // Component pages
 import { DashboardComponent } from "./dashboards/dashboard/dashboard.component";
 
+import { AnalyticsComponent } from "./dashboards/analytics/analytics.component";
+
+
 const routes: Routes = [
     {
         path: "",

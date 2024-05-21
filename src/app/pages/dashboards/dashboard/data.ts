@@ -167,32 +167,25 @@ import { ChartType } from './dashboard.model';
  * Stat Counder Data
  */
 const statData = [{
-      title: 'TOTAL EARNINGS',
-      value: 559.25,
-      icon: 'bx-dollar-circle',
-      persantage: '16.24',
-      profit: 'up',
+       title: 'الملفات',
+      value: 559,
+      icon: 'bx-wallet',
+      
+     
       icon_bg_color:'bg-success',
       link: 'View net earnings'
-    }, {
-        title: 'ORDERS',
-        value: 36894,
-        icon: 'bx-shopping-bag',
-        persantage: '3.57',
-        profit: 'down',
-        icon_bg_color:'bg-info',
-        link: 'View all orders'
-    }, {
-        title: 'CUSTOMERS',
-        value: 183.35,
-        icon: 'bx-user-circle',
-        persantage: '29.08',
-        profit: 'up',
+    }
+    , {
+      title: 'ملفات اليوم',
+        value: 183,
+        icon: 'bx-wallet',
+       
+      
         icon_bg_color:'bg-warning',
         link: 'See details'
     }, {
-        title: 'MY BALANCE',
-        value: 165.89,
+      title: 'اصول الكالمات',
+        value: 165,
         icon: 'bx-wallet',
         persantage: '0.00',
         profit: 'equal',

@@ -10,7 +10,7 @@ export const MENU: MenuItem[] = [
     id: 2,
     label: ' لوحات القيادة',
     icon: 'mdi mdi-speedometer',
-    link: '/analytics',
+    link: '/',
    
   },
   {
