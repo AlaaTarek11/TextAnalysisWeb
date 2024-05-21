@@ -1,0 +1,67 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs dir="ltr"  [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+    <div class="col-xxl-12">
+      
+
+        <div class="row">
+            <div *ngFor="let stat of statData" class="col-md-4">
+                <app-analatics-stat [title]="stat.title" [value]="stat.value" [icon]="stat.icon" [persantage]="stat.persantage" [profit]="stat.profit" [icon_bg_color]="stat.icon_bg_color"></app-analatics-stat>
+            </div>
+        </div>
+    </div> <!-- end col-->
+</div> <!-- end row-->
+ 
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header border-0 align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">الملفات</h4>
+                <div class="d-flex gap-1">
+                    <button type="button" class="btn btn-soft-secondary btn-sm shadow-none" (click)="setcolumnchartvalue('all')">
+                        ALL
+                    </button>
+                    <button type="button" class="btn btn-soft-secondary btn-sm shadow-none" (click)="setcolumnchartvalue('1M')">
+                        1M
+                    </button>
+                    <button type="button" class="btn btn-soft-secondary btn-sm shadow-none" (click)="setcolumnchartvalue('6M')">
+                        6M
+                    </button>
+                    <button type="button" class="btn btn-soft-primary btn-sm shadow-none" (click)="setcolumnchartvalue('1Y')">
+                        1Y
+                    </button>
+                </div>
+            </div><!-- end card header -->
+            <div class="card-header p-0 border-0 bg-soft-light">
+                <div class="row g-0 text-center">
+                    <div class="col-6 col-sm-4">
+                        <div class="p-3 border border-dashed border-start-0">
+                            
+                         </div>
+                    </div><!--end col-->
+                    <div class="col-6 col-sm-4">
+                      
+                    </div><!--end col-->
+                    <div class="col-6 col-sm-4">
+                       
+                    </div><!--end col-->
+                </div>
+            </div><!-- end card header -->
+            <div class="card-body p-0 pb-2">
+                <div class="mb-n2">
+                    <apx-chart [series]="basicColumnChart.series" [chart]="basicColumnChart.chart" [colors]="basicColumnChart.colors" [dataLabels]="basicColumnChart.dataLabels"
+              [plotOptions]="basicColumnChart.plotOptions" [yaxis]="basicColumnChart.yaxis" [legend]="basicColumnChart.legend"
+              [fill]="basicColumnChart.fill" [stroke]="basicColumnChart.stroke" [tooltip]="basicColumnChart.tooltip"
+              [xaxis]="basicColumnChart.xaxis" dir="rtl"></apx-chart>
+                </div>
+            </div><!-- end card body -->
+        </div><!-- end card -->
+    </div><!-- end col -->
+
+   
+</div><!-- end row -->
+
+ 

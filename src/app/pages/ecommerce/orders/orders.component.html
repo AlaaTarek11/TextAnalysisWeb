@@ -1,0 +1,314 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="الملفات" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card" id="orderList">
+      <div class="card-header  border-0">
+        <div class="row align-items-center gy-3">
+          <div class="col-sm">
+            <h5 class="card-title mb-0 flex-grow-1">الملفات</h5>
+          </div>
+          <div class="col-sm-auto">
+            <div class="d-flex gap-1 flex-wrap">
+              <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn"
+                data-bs-target="#showModal" (click)="openModal(content)"><i class="ri-add-line align-bottom me-1"></i>
+                اضافه ملف جديد</button>
+              
+              <button class="btn btn-soft-danger" id="remove-actions" style="display: none"
+                (click)="deleteMultiple(deleteModel)"><i class="ri-delete-bin-2-line"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="card-body border border-dashed border-end-0 border-start-0">
+        <div class="row g-3">
+          <div class="col-xxl-10 col-sm-10">
+            <div class="search-box">
+              <textarea type="text" name="SeachText" class="form-control" rows="3"
+                placeholder="ابحث"
+                #searchText>
+              </textarea>
+              <i class="ri-search-line search-icon"></i>
+            </div>
+          </div>
+          
+        </div>
+         
+        <br>
+        <br>
+
+        <div class="row g-3">
+          <div class="col-xxl-1 col-sm-1"></div>
+          <div class="col-xxl-3 col-sm-3">
+            <div class="mt-4 mt-md-0">
+            
+                <div class="form-check form-check-right mb-2">
+                    <input class="form-check-input" type="radio" name="AnyOrAll"
+                        id="ForAll" #forAll>
+
+
+
+                    <label class="form-check-label" for="formradioRight1">
+                        كل الكالمات
+                    </label>
+                </div>
+                <div>
+                    <div class="form-check form-check-right">
+                        <input class="form-check-input" type="radio" value="" name="AnyOrAll"
+                            id="ForAny" #forAny >
+                        <label class="form-check-label" for="flexCheckCheckedDisabled2">
+                          بعض الكالمات
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div><!--end col-->
+
+        <div class="col-xxl-3 col-sm-3">
+          <div class="mt-4 mt-md-0">
+          
+              <div class="form-check form-check-right mb-2">
+                  <input class="form-check-input" type="radio" name="ExactOrStem"
+                      id="forStem" #forStem>
+                  <label class="form-check-label" for="formradioRight1">
+                      الكالمات المشابهه
+                  </label>
+              </div>
+              <div>
+                  <div class="form-check form-check-right">
+                      <input class="form-check-input" type="radio" value="" name="ExactOrStem"
+                          id="forExact" #forExact >
+                      <label class="form-check-label" for="flexCheckCheckedDisabled2">
+                          
+تطابق الكالمات
+                      </label>
+                  </div>
+              </div>
+          </div>
+      </div><!--end col-->
+     
+      
+      <div class="col-xxl-3 col-sm-3">
+        <div class="mt-4 mt-md-0">
+
+            <div class="form-check form-check-right mb-2">
+                <input class="form-check-input" type="radio" name="Pharse" #forpharse
+                    id="isPharse" (click)="disableOtherRadio()">
+                <label class="form-check-label" for="formradioRight1">
+                   تطابق العباره
+                </label>
+            </div>
+            
+        </div>
+    </div><!--end col-->
+   
+        </div>
+        <div class="row g-3">
+          <div class="col-xxl-10 col-sm-10"></div>
+          <div class="col-xxl-2 col-sm-2">
+            <div>
+              <button (click)="search()" type="button" class="btn btn-primary w-100"> <i class="ri-equalizer-fill me-1 align-bottom"></i>
+                بحث
+              </button>
+            </div>
+          </div>
+        </div>
+        <!--end row-->
+      </div>
+      <div class="card-body pt-0">
+         <div>
+
+          <div class="table-responsive table-card mb-0">
+          
+            <table class="table">
+              <thead>
+                <tr class="bg-light text-muted text-uppercase">
+                  <th scope="col" style="width: 25px;">
+                    <!-- <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="checkAll" value="option"
+                        [(ngModel)]="masterSelected" (change)="checkUncheckAll($event)">
+                    </div> -->
+                  </th>
+                  <th class="" ordersortable="id" (orderssort)="onSort($event)"> رقم الملف</th>
+                  <th class="" ordersortable="user_Identifier" (orderssort)="onSort($event)">اسم الملف</th>
+                  <th class="" ordersortable="created_On" (orderssort)="onSort($event)">تاريخ رفع الملف</th>
+                  <th class=""></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of CustomersData" id="o_{{data.id}}">
+                  <th scope="row">
+                    <!-- <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="checkAll" value="false"
+                        [(ngModel)]="data.id" (change)="onCheckboxChange($event)">
+                    </div> -->
+                  </th>
+                  <td>
+                    
+                    <a routerLink="/ecommerce/order-details/{{data.id}}">
+                      #
+                      <ngb-highlight [result]="data.id" [term]="service.searchTerm"></ngb-highlight>
+                    </a></td>
+                  <td>
+                    <ngb-highlight [result]="data.user_Identifier" [term]="service.searchTerm"></ngb-highlight>
+                  </td>
+                  
+                  <td>
+                    <ngb-highlight [result]="data.created_On | date :'longDate'" [term]="service.searchTerm">
+                    </ngb-highlight>
+                  </td>
+                 
+                  
+                  <td>
+                     <ul class="list-inline hstack gap-2 mb-0">
+                      <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                        ngbTooltip="التفاصيل" placement="top">
+                        <a routerLink="/ecommerce/order-details/{{data.id}}" class="text-primary d-inline-block">
+                          <i class="ri-eye-fill fs-16"></i>
+                        </a>
+                      </li>
+                      <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                        ngbTooltip="تعديل" placement="top">
+                        <a href="javascript:void(0);" data-bs-toggle="modal"
+                          class="text-primary d-inline-block edit-item-btn" data-bs-toggle="modal" id="create-btn"
+                          data-bs-target="#showModal" (click)="editDataGet(data.id,content)">
+                          <i class="ri-pencil-fill fs-16"></i>
+                        </a>
+                      </li>
+                      <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                      ngbTooltip="تحديد" placement="top">
+                      <a (click)="highlght(data.id)" class="text-secondary d-inline-block">
+                        <i class="ri-pencil-fill fs-16"></i> 
+
+                                    
+                       </a>
+                    </li>
+                      <li class="list-inline-item me-0" ngbTooltip="حذف" placement="top" data-bs-toggle="tooltip"
+                        data-bs-trigger="hover" (click)="confirm(deleteModel,data.id)">
+                        <a class="text-danger d-inline-block remove-item-btn" data-bs-toggle="modal"
+                          data-bs-target="#deleteOrder">
+                          <i class="ri-delete-bin-5-fill fs-16"></i>
+                        </a>
+                      </li>
+                    </ul> 
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row justify-content-md-between align-items-md-center">
+            <div class="col col-sm-6">
+                <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+                    Showing
+                    {{service.startIndex}} to
+                    {{service.endIndex}} of {{service.totalRecords}}
+                    entries
+                </div>
+            </div>
+            <!-- Pagination -->
+            <div class="col col-sm-6">
+                <div class="text-sm-right float-end listjs-pagination">
+                    <ngb-pagination [collectionSize]="(total | async)!" [(page)]="service.page"
+                        [pageSize]="service.pageSize">
+                    </ngb-pagination>
+                </div>
+            </div>
+            <!-- End Pagination -->
+        </div>
+         </div>
+       
+       
+
+          <!-- Order Create Model -->
+          <ng-template #content role="document" let-modal>
+            <div class="modal-header bg-light p-3">
+              <h5 class="modal-title" id="exampleModalLabel">اضافه ملف</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"
+                (click)="modal.dismiss('Cross click')"></button>
+            </div>
+            <form (ngSubmit)="saveUser()" [formGroup]="ordersForm" class="tablelist-form" autocomplete="off">
+              <input hidden type="text" id="documentId-field" 
+              formControlName="id" />
+
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="documentname-field" class="form-label">اسم الملف</label>
+                  <input type="text" id="documentname-field" class="form-control" placeholder="اسم الملف" required
+                    formControlName="equivalent_id" [ngClass]="{ 'is-invalid': submitted && form['equivalent_id'].errors }" />
+                  
+                    <div *ngIf="submitted && form['equivalent_id'].errors" class="invalid-feedback" align="left">
+                    <div *ngIf="form['equivalent_id'].errors['required']">اسم الملف مطلوب</div>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="documentimg-field" class="form-label">الملف</label>
+                  <input class="form-control" required id="documentimg-field" type="file"  (change)="onFileSelected($event)"
+                  formControlName="file" [ngClass]="{ 'is-invalid': submitted && form['file'].errors }"
+                   accept=".doc, .docx, .txt">
+
+                  <div *ngIf="submitted && form['file'].errors" class="invalid-feedback" align="left">
+                    <div *ngIf="form['file'].errors['required']">الملف مطلوب</div>
+                  </div>
+                </div>
+
+             
+
+              
+ 
+              </div>
+              <div class="modal-footer">
+                <div class="hstack gap-2 justify-content-end">
+                  <button type="button" class="btn btn-light" data-bs-dismiss="modal"
+                    (click)="modal.close('Close click')">غلق</button>
+                  <button type="submit" class="btn btn-success" id="add-btn">اضف</button>
+                </div>
+              </div>
+            </form>
+          </ng-template>
+          <!--End Modal -->
+       
+      </div>
+
+      <div id="elmLoader">
+        <div class="spinner-border text-primary avatar-sm" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    </div>
+   
+  </div>
+   <!--end col-->
+</div>
+  <!--end row-->
+
+  <!-- removeItemModal -->
+  <ng-template #deleteModel let-modal>
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button"  class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="deleteRecord-close"
+          (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mt-2 text-center">
+          <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop"
+            colors="primary:#405189,secondary:#f06548" style="width:90px;height:90px"></lord-icon>
+          <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
+            <h4>هل انت متاكد من حذف هذا الملف  </h4>
+            <!-- <p class="text-muted mx-4 mb-0">Deleting your order will remove all of your information from our database.
+            </p> -->
+          </div>
+        </div>
+        <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+          <button class="btn btn-link link-success fw-medium text-decoration-none" data-bs-dismiss="modal"
+            (click)="modal.close('Close click')"><i class="ri-close-line me-1 align-middle"></i> غلق</button>
+          <button type="button" class="btn w-sm btn-danger " id="delete-product" (click)="deleteData(deleteId)"
+            (click)="modal.close('Close click')">نعم</button>
+        </div>
+      </div>
+    </div><!-- /.modal-content -->
+  </ng-template>

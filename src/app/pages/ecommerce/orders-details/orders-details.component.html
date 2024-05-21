@@ -1,0 +1,103 @@
+<!-- Start Breadcrumbs -->
+<div class="breadCrumbItems">
+  <app-breadcrumbs title="تفاصيل الملف" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+</div>
+
+<!-- End Breadcrumbs -->
+<div dir="ltr">
+  <button class="btn btn-primary" (click)="backClicked()">
+    الرجوع
+    <i class="ci-arrow-left"></i>
+  </button>
+</div>
+<br>
+<div class="row" *ngIf="docData">
+  <div class="col-xl-12">
+      <div class="card">
+          <div class="card-header">
+             <div class="d-flex align-items-center">
+                  <h5 class="card-title flex-grow-1 mb-0">ملف رقم  : {{docData.id}}#</h5>
+                  <div class="flex-shrink-0">
+                    <h5 class="card-title flex-grow-1 mb-0">تاريخ الرفع  :{{ docData.created_On }} 
+                    </h5>
+                      <!-- <a routerLink="/invoices/details" class="btn btn-success btn-sm"><i class="ri-download-2-fill align-middle me-1"></i> Invoice</a> -->
+                  </div>
+             </div>
+          </div>
+          <div class="card-body">
+            <!-- <div class="col-xxl-10 col-sm-10">
+                <div class="search-box">
+                  <textarea type="text" name="SeachText" class="form-control" rows="3"
+                    placeholder="ابحث"
+                    >
+                  </textarea>
+                  <i class="ri-search-line search-icon"></i>
+                </div>
+            </div>
+            <br>
+            <br> -->
+    
+            <!-- <div class="row g-3">
+              <div class="col-xxl-1 col-sm-1"></div>
+              <div class="col-xxl-3 col-sm-3">
+                <div class="mt-4 mt-md-0">
+            
+                  <div class="form-check form-check-right mb-2">
+                    <input class="form-check-input" type="radio" name="AnyOrAll" id="ForAll">
+                    <label class="form-check-label" for="formradioRight1">
+                      الكل
+                    </label>
+                  </div>
+                  <div>
+                    <div class="form-check form-check-right">
+                      <input class="form-check-input" type="radio" value="" name="AnyOrAll" id="ForAny" checked>
+                      <label class="form-check-label" for="flexCheckCheckedDisabled2">
+                        البعض
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+            
+            
+            
+              <div class="col-xxl-3 col-sm-3">
+                <div class="mt-4 mt-md-0">
+            
+                  <div class="form-check form-check-right mb-2">
+                    <input class="form-check-input" type="radio" name="formradioRight" id="ForAny">
+                    <label class="form-check-label" for="formradioRight1">
+                      تطابق العباره
+                    </label>
+                  </div>
+            
+                </div>
+              </div>
+            
+            </div> -->
+            <!-- <div class="row g-3">
+              <div class="col-xxl-10 col-sm-10"></div>
+              <div class="col-xxl-2 col-sm-2">
+                <div>
+                  <button type="button" class="btn btn-primary w-100"> <i class="ri-equalizer-fill me-1 align-bottom"></i>
+                    تحديد
+                  </button>
+                </div>
+              </div>
+            </div> -->
+          </div>
+      </div>
+      <div class="card">
+          <div class="card-header">
+            <h3 style="text-align:center;">{{docData.equivalent_id}} </h3>
+          </div>
+          <div class="card-body">
+            <div [innerHTML]="docData.text" class="profile-timeline order-status">
+            
+           </div>
+          </div>
+      </div><!--end card-->
+  </div><!--end col-->
+  
+</div><!--end row-->
