@@ -26,6 +26,7 @@ baseline.json
 .husky/_
 aio/content/examples/.DS_Store
 node_modules
+dist/velzon
 #src/assets/images
 
 
