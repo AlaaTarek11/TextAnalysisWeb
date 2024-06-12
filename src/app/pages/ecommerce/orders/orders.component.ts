@@ -67,7 +67,13 @@ export class OrdersComponent {
 
   @ViewChildren(NgbdOrdersSortableHeader) headers!: QueryList<NgbdOrdersSortableHeader>;
 
-  constructor(private router: Router,private modalService: NgbModal, public service: OrdersService, private formBuilder: UntypedFormBuilder, private ApiService: restApiService, private datePipe: DatePipe) {
+  constructor(private router: Router,
+    private modalService: NgbModal, 
+    public service: OrdersService, 
+    private formBuilder: UntypedFormBuilder, 
+    private ApiService: restApiService, private datePipe: DatePipe) {
+
+      
     this.ordersList = service.countries$;
     this.total = service.total$;
     this.selectedOption = ''; // Initialize selectedOption

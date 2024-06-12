@@ -15,8 +15,12 @@ export const GlobalComponent = {
     DocumentDelete:'Document/Remove/',
     DocumentSearch:'Document/Search',
     DocumentHighlight:'Document/Highlight',
-
     DocumentConvertPDFToText: '/Document/ConvertPDFToText/',
+
+    // Dashboard 
+   
+    Dashboard_GetCounters:'Dashboard/GetCounters',
+    Dashboard_GetDocumentsByMonthChart: 'Dashboard/GetDocumentsByMonthChart',
 
     // Products Api
     product:'apps/product',

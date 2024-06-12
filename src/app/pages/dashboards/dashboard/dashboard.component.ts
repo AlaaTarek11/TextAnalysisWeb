@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToastService } from './toast-service';
-
-
 import { circle, latLng, tileLayer } from 'leaflet';
 import { SwiperOptions } from 'swiper';
-
 import { BestSelling, TopSelling, RecentSelling, statData } from './data';
 import { ChartType } from './dashboard.model';
+import { restApiService } from "../../../core/services/rest-api.service";
+
 
 @Component({
   selector: 'app-dashboard',
@@ -31,7 +30,7 @@ export class DashboardComponent implements OnInit {
   simpleDonutChart: any;
   TopPages: any;
 
-  constructor() {
+  constructor(private ApiService: restApiService) {
   }
 
   ngOnInit(): void {
@@ -173,120 +172,106 @@ export class DashboardComponent implements OnInit {
   /**
  * Basic Column Charts
  */
-  setcolumnchartvalue(x: any) {
-      if (x == 'all') {
-          this.basicColumnChart.series = [{
-              name: 'Last Year',
-              data: [36.2, 22.4, 38.2, 30.5, 26.4, 30.4, 20.2, 29.6, 10.9, 36.2, 22.4, 38.2]
-          }, {
-              name: 'Current Year',
-              data: [36.2, 22.4, 38.2, 30.5, 26.4, 30.4, 20.2, 29.6, 10.9, 36.2, 22.4, 38.2]
-          }]
-      }
-      if (x == '1M') {
-          this.basicColumnChart.series = [{
-              name: 'Last Year',
-              data: [25.3, 12.5, 20.2, 18.5, 40.4, 25.4, 15.8, 22.3, 19.2, 25.3, 12.5, 20.2]
-          }, {
-              name: 'Current Year',
-              data: [25.3, 12.5, 20.2, 18.5, 40.4, 25.4, 15.8, 22.3, 19.2, 25.3, 12.5, 20.2]
-          }]
-      }
-      if (x == '6M') {
-          this.basicColumnChart.series = [{
-              name: 'Last Year',
-              data: [36.2, 22.4, 38.2, 30.5, 26.4, 30.4, 20.2, 29.6, 10.9, 36.2, 22.4, 38.2]
-          }, {
-              name: 'Current Year',
-              data: [25.3, 12.5, 20.2, 18.5, 40.4, 25.4, 15.8, 22.3, 19.2, 25.3, 12.5, 20.2]
-          }]
-      }
-      if (x == '1Y') {
-          this.basicColumnChart.series = [{
-              name: 'Last Year',
-              data: [25.3, 12.5, 20.2, 18.5, 40.4, 25.4, 15.8, 22.3, 19.2, 25.3, 12.5, 20.2]
-          }, {
-              name: 'Current Year',
-              data: [36.2, 22.4, 38.2, 30.5, 26.4, 30.4, 20.2, 29.6, 10.9, 36.2, 22.4, 38.2]
-          }]
-      }
+  setcolumnchartvalue(colors: any) {
+     
+    this.ApiService.Dashboard_GetDocumentsByMonthChart().subscribe({
+        
+        next: data => {
+            debugger
+            const  result = JSON.parse(data);
+            const li=[0,0,0,0,0,0 ,0,0,0,0,0,0];
+            const obj =result.data;
+            for (let i = 0; i < obj.months.length; i++) {
+                const month = parseInt(obj.months[i], 10);
+ 
+                li[month]=obj.counts[i];
+              }
+            colors = this.getChartColorsArray(colors);
+            this.basicColumnChart = {
+                series: [  {
+                    name: 'Current Year',
+                    data: li,
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 306,
+                    stacked: true,
+                    toolbar: {
+                        show: false,
+                    }
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: '20%',
+                        borderRadius: 6,
+                    },
+                },
+                dataLabels: {
+                    enabled: false,
+                },
+                legend: {
+                    show: true,
+                    position: 'bottom',
+                    horizontalAlign: 'center',
+                    fontWeight: 400,
+                    fontSize: '8px',
+                    offsetX: 0,
+                    offsetY: 0,
+                    markers: {
+                        width: 9,
+                        height: 9,
+                        radius: 4,
+                    },
+                },
+                stroke: {
+                    show: true,
+                    width: 2,
+                    colors: ['transparent']
+                },
+                grid: {
+                    show: false,
+                },
+                colors: colors,
+                xaxis: {
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    axisTicks: {
+                        show: false,
+                    },
+                },
+                yaxis: {
+                    title: {
+                        text: '$ (thousands)'
+                    },
+                },
+                fill: {
+                    opacity: 1
+      
+                },
+                tooltip: {
+                    y: {
+                        formatter: function (val: any) {
+                            return "$ " + val + " thousands"
+                        }
+                    }
+                }
+            };
+          
+
+        },
+        
+        
+      });
+     
+      
+      
 
   }
 
   private _basicColumnChart(colors: any) {
-      colors = this.getChartColorsArray(colors);
-      this.basicColumnChart = {
-          series: [{
-              name: 'Last Year',
-              data: [36.2, 22.4, 38.2, 30.5, 26.4, 30.4, 20.2, 29.6, 10.9, 36.2, 22.4, 38.2]
-          }, {
-              name: 'Current Year',
-              data: [36.2, 22.4, 38.2, 30.5, 26.4, 30.4, 20.2, 29.6, 10.9, 36.2, 22.4, 38.2]
-          }],
-          chart: {
-              type: 'bar',
-              height: 306,
-              stacked: true,
-              toolbar: {
-                  show: false,
-              }
-          },
-          plotOptions: {
-              bar: {
-                  horizontal: false,
-                  columnWidth: '20%',
-                  borderRadius: 6,
-              },
-          },
-          dataLabels: {
-              enabled: false,
-          },
-          legend: {
-              show: true,
-              position: 'bottom',
-              horizontalAlign: 'center',
-              fontWeight: 400,
-              fontSize: '8px',
-              offsetX: 0,
-              offsetY: 0,
-              markers: {
-                  width: 9,
-                  height: 9,
-                  radius: 4,
-              },
-          },
-          stroke: {
-              show: true,
-              width: 2,
-              colors: ['transparent']
-          },
-          grid: {
-              show: false,
-          },
-          colors: colors,
-          xaxis: {
-              categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-              axisTicks: {
-                  show: false,
-              },
-          },
-          yaxis: {
-              title: {
-                  text: '$ (thousands)'
-              },
-          },
-          fill: {
-              opacity: 1
-
-          },
-          tooltip: {
-              y: {
-                  formatter: function (val: any) {
-                      return "$ " + val + " thousands"
-                  }
-              }
-          }
-      };
+     
+      const result= this.setcolumnchartvalue(colors);
+    
   }
 
   /**
@@ -493,7 +478,26 @@ export class DashboardComponent implements OnInit {
   * Fetches the data
   */
   private fetchData() {
-      this.statData = statData;
+     
+    this.ApiService.Dashboard_GetCounters().subscribe({
+        
+        next: data => {
+            debugger
+            const  result = JSON.parse(data);
+            statData[0].value =result.data.total_documents;
+            statData[1].value =result.data.count_today_documents;
+            statData[2].value =result.data.total_words;
+
+            this.statData = statData;
+
+        },
+        
+        
+      });
+      
+
    }
+
+
 
 }

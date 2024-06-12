@@ -54,6 +54,19 @@ export class restApiService {
     return this.http.get(GlobalComponent.API_URL + GlobalComponent.AllDocuments, {  headers: headerToken, responseType: 'text' });
   }
 
+  Dashboard_GetCounters(): Observable<any> {
+    debugger
+    //var headerToken = {'Authorization': `Bearer `+ localStorage.getItem('token')};    
+    var headerToken = {}; 
+    return this.http.get(GlobalComponent.API_URL + GlobalComponent. Dashboard_GetCounters, {  headers: headerToken, responseType: 'text' });
+  }
+
+  Dashboard_GetDocumentsByMonthChart(): Observable<any> {
+    debugger
+    //var headerToken = {'Authorization': `Bearer `+ localStorage.getItem('token')};    
+    var headerToken = {}; 
+    return this.http.get(GlobalComponent.API_URL + GlobalComponent. Dashboard_GetDocumentsByMonthChart, {  headers: headerToken, responseType: 'text' });
+  }
   documentsSearch(searchData:any): Observable<any> {
     debugger
     //var headerToken = {'Authorization': `Bearer `+ localStorage.getItem('token')};    
@@ -79,7 +92,7 @@ export class restApiService {
    deleteDoc(id:any): Observable<any> {
     debugger
     var headerToken = {};    
-    return this.http.delete(GlobalComponent.API_URL + '/Document/Remove?id=' + id, {  headers: headerToken, responseType: 'text' });
+    return this.http.delete(GlobalComponent.API_URL + 'Document/Remove?id=' + id, {  headers: headerToken, responseType: 'text' });
   }
 
   /**

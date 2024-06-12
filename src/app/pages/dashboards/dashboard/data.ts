@@ -167,7 +167,7 @@ import { ChartType } from './dashboard.model';
  * Stat Counder Data
  */
 const statData = [{
-       title: 'الملفات',
+      title: 'الملفات',
       value: 559,
       icon: 'bx-wallet',
       
