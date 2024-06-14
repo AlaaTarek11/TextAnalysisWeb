@@ -48,7 +48,7 @@ export class OrdersDetailsComponent implements OnInit {
      this.breadCrumbItems = [
     
       { label: 'تفاصيل الملف', active: true },
-      { label: 'الملفات' , link: '/ecommerce/orders'}
+      // { label: 'الملفات' , link: '/ecommerce/orders'}
     ];
 
     this.getDoc();

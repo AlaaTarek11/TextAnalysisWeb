@@ -380,8 +380,9 @@ export class OrdersComponent {
               debugger
               document.getElementById('elmLoader')?.classList.add('d-none')
 
-              document.getElementById('o_' + id)?.remove();
+              document.getElementById('o_' + id)?.classList.add('d-none')
               this.CustomersData.unshift(data.data);
+
               this.modalService.dismissAll();
               let timerInterval: any;
               Swal.fire({
